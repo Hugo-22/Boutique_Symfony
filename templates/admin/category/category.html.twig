@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste catégories{% endblock %}
+
+{% block content %}
+
+
+<div class="container text-center">
+        <h1 class="text-center mt-4">Catégories</h1>
+        <a class="text-decoration-none" href="{{path('add_category')}}"><i class="fas fa-plus mr-2"></i>Nouvelle catégorie</a>
+                <table class="table table-hover mt-5 text">
+                        <thead class="thead-dark text-uppercase">
+                            <tr>
+                                <th class="text-center">Nom</th>
+                                <th class="text-center">Modifier</th>
+                                <th class="text-center">Supprimer</th>
+                            </tr>
+                        </thead>
+                            
+                        {% for cat in categories %}
+                        
+                        <tr>
+                            
+                            <td class="text-center font-weight-bold">{{ cat.nom }}</td>
+                            <td class="text-center"><a class="both input-style color-blue" href="{{ path('update_category', {'id' : cat.id}) }}">Update</a></td>
+                            <td class="text-center"><form action="{{path('delete_cat', {'id' : cat.id})}}" method="post" class="col" onsubmit="return confirm('Voulez-vous vraiment supprimer ?');">
+                                <input type="hidden" name="_method" value="SUP">
+                                <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ cat.id)}}">
+                                <input type="submit" value="Supprimer" class="input-style both input-style-color">
+                            </form></td>
+
+                        </tr>
+                        {% endfor %}
+                    </table>
+        </div>
+
+{% endblock %}

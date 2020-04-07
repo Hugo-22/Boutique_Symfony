@@ -1,12 +1,43 @@
+  
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
+        <title>{% block title %}Boutique symfony | {% endblock %}</title>
+        {% block stylesheets %}
+            <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+         <link rel="stylesheet" href="{{asset('css/style.css')}}">
+            
+        {% endblock %}    
     <body>
-        {% block body %}{% endblock %}
+        <header>
+        {% block header %}
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-right">
+                    <a class="navbar-brand" href="">My Tshirt</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                {% if app.user %}
+                                <a class="nav-link" href="/logout">Se déconnecter</a>
+                                {% else %}
+                                <a class="nav-link" href="/login">Se connecter</a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+        {% endblock %}
+        </header>
+        {% block content %}
+        {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
