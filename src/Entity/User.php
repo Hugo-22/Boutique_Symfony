@@ -2,14 +2,22 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(
+ * fields = {"username"},
+ * message="le user existe déjà"
+ * )
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -67,6 +75,29 @@ class User
      * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="User")
      */
     private $orders;
+
+
+     /**
+     * @Assert\EqualTo(propertyPath="password", message="les mdp ne correspondent pas")
+     */
+    private $verifPassword;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $roles;
+
+    public function getVerifPassword(): ?string
+    {
+        return $this->verifPassword;
+    }
+
+    public function setVerifPassword(string $verifPassword): self
+    {
+        $this->verifPassword = $verifPassword;
+
+        return $this;
+    }
 
     public function __construct()
     {
@@ -213,6 +244,28 @@ class User
                 $order->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function eraseCredentials()
+    {
+
+    }
+
+    public function getSalt()
+    {
+        
+    }
+
+    public function getRoles(): ?string
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(string $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }

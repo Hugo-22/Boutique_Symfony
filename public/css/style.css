@@ -27,3 +27,20 @@
 .color-blue {
     background-color: #3E7EEB;
 }
+
+
+.input { 
+    width: 100%;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #999;
+    padding: 6px 30px;
+    font-family: Poppins;
+    box-sizing: border-box;
+    border-radius: 0 !important;
+}
+
+.img-signup {
+    width: 420px !important;
+    max-width: unset;
+}
