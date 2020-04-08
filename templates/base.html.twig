@@ -3,17 +3,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Boutique symfony | {% endblock %}</title>
+        <title>{% block title %}Boutique symfony{% endblock %}</title>
         {% block stylesheets %}
             <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
          <link rel="stylesheet" href="{{asset('css/style.css')}}">
-         <link rel="stylesheet" href="{{asset('css/icone.css')}}">
-         <link rel="stylesheet" href="{{asset('css/main.css')}}">
-        
-            
-        {% endblock %}    
+        {% endblock %}
     <body>
         <header>
         {% block header %}
@@ -27,9 +23,15 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="">Home</a>
                             </li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href=" {{path('admin')}} ">Administration</a>
+                            </li>
+                            {% endif %}
+                            
                             <li class="nav-item">
                                 {% if app.user %}
-                                <a class="nav-link" href="/logout">Se déconnecter</a>
+                                <a class="nav-link" href="{{path('logout')}}">Se déconnecter</a>
                                 {% else %}
                                 <a class="nav-link" href="{{path('login')}}">Se connecter</a>
                                 {% endif %}
@@ -38,7 +40,7 @@
                                 <a class="nav-link" href="{{path('inscription')}}">S'inscrire</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> 
                 </nav>
         {% endblock %}
         </header>
@@ -47,6 +49,9 @@
          <script src="{{asset('js/main.js')}}"></script>
          <script src="{{asset('js/jquery/min.js')}}"></script>
         {% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            {% endblock %}
     </body>
 </html>

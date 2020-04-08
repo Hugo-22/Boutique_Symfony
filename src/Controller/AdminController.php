@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\User;
 use App\Form\CategoryType;
 use App\Form\ProductType;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
@@ -75,7 +77,7 @@ class AdminController extends AbstractController
             $objectManager->remove($category);
             $objectManager->flush();
             $this->addFlash('success', "L'action a été effectué");
-             return $this->redirectToRoute("liste_cat");
+            return $this->redirectToRoute("liste_cat");
         }
      }
 
@@ -152,4 +154,30 @@ class AdminController extends AbstractController
              return $this->redirectToRoute("liste_product");
         }
      }
+
+     // METHODS CLIENTS
+
+
+        /**
+     * @Route("/admin/user/{id}", name="details_user")
+     */
+    public function detailsClient(User $user)
+    {
+        return $this->render('admin/user/detailsUser.html.twig', [
+            "user" => $user
+        ]);
+    }
+
+      /**
+     * @Route("/admin/user", name="liste_user")
+     */
+    public function listClient(UserRepository $userRepository)
+    {
+
+        $users = $userRepository->findAll();
+
+        return $this->render('admin/user/user.html.twig', [
+            "users" => $users
+        ]);
+    }
 }

@@ -4,10 +4,27 @@
 
 {% block content %}
 
-        {{form_start(formCat)}}
-        {{form_widget(formCat)}}
-
-        <input type="submit" value="Valider" class="btn btn-primary">
-        {{form_end(formCat)}}
+<div class="container-fluid ">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-5 mb-3">
+                    <h1> Ajouter une catégorie</h1>
+                </div>
+            </div>
+                {{form_start(formCat, {'attr': {'class':'row'}})}}
+                    {# {{form_widget(formP)}} #}
+                <div class="input-formCat col-12 mb-2">
+                    {# Label #}
+                    {# Input title class input-title #}
+                    {{ form_label(formCat.nom, 'Nom de la catégorie') }}
+                    {{form_widget(formCat.nom, {'attr': {'class':'form-control'}})}}
+                        <span id="msg-errors" class="error text-danger">{{ form_errors(formCat.nom) }}</span>
+                        <div class="input-formP submit-formP col-12 mb-2 d-flex justify-content-end">
+                            <input type="submit" name="" value="Enregistrer" class="btn btn-dark btn-submit-form mt-4">
+                        </div>
+                    {{form_end(formCat)}}
+                </div>
+    </div>
+    </div>
 
 {% endblock %}

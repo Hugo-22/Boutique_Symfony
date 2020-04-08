@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+<h1 class="text-center mt-4">Mon panier</h1>
+    {% if items | length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td><img src="{{ asset('uploads/') ~ item.product.image }}" alt="items" width="50" height="50">
+                {{ item.product.nom }}</td>
+                <td>{{ item.product.price }}€</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.product.price * item.quantity }}€</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>panier vide</p>
+    {% endif %}
+</div>
+
+{% endblock %}

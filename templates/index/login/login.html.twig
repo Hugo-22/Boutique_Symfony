@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block content %}
 <section class="sign-in">
@@ -21,7 +21,7 @@
         
             <form action="{{path('login')}}" method="post">
                 <div class="form-group">
-                    <label for="">Login : </label>
+                    <label for="">Login : </label>  
                     <input type="text" name="_username" required class="form-control">
                 </div>
         
