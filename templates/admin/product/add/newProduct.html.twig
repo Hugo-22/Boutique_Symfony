@@ -1,65 +1,68 @@
 {% extends 'base.html.twig' %}
-{% form_theme formP 'bootstrap_4_layout.html.twig' %}
 
-{% block title %}Ajout produit{% endblock %}
-
+{% block title %}Admin | Ajouter un produit | {{ parent() }}{% endblock %}
+{% block header %}
+    {% include "includes/adminNavBar.html.twig" %}
+{% endblock %}
 {% block content %}
-
-<div class="container-fluid ">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 mt-5 mb-3">
-                <h1> Ajouter ou modifier un produit</h1>
-            </div>
-        </div>
+	<div class="container-fluid ">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-5 mb-3">
+                    <h1>Ajouter ou modifier un produit</h1>
+                </div>
                 {{form_start(formP, {'attr': {'class':'row'}})}}
-                    {# {{form_widget(formP)}} #}
-                <div class="input-formP col-12 mb-2">
-                    {# Label #}
-                    {{ form_label(formP.nom, 'Nom du produit') }}
-                    {# Input title class input-title #}
-                    {{form_widget(formP.nom, {'attr': {'class':'form-control'}})}}
-                    <span id="msg-errors" class="error text-danger">{{ form_errors(formP.nom) }}</span>
-                </div>
-                <div class="input-formP col-12 mb-2">
-                    {# Label #}
-                    {{ form_label(formP.image, 'Image') }}
-                    {# Input title class input-title #}
-                    {{form_widget(formP.image, {'attr': {'class':'form-control'}})}}
-                    <span id="msg-errors" class="error text-danger">{{ form_errors(formP.image) }}</span>
-                </div>
-                <div class="input-formP col-12 mb-2">
-                    {# Label #}
-                    {{ form_label(formP.description, 'Decription') }}
-                    {# Input title class input-title #}
-                    {{form_widget(formP.description, {'attr': {'class':'form-control'}})}}
-                    <span id="msg-errors" class="error text-danger">{{ form_errors(formP.description) }}</span>
-                </div>
-                <div class="input-formP col-12 mb-2">
-                    {# Label #}
-                    {{ form_label(formP.category, 'Catégorie du produit') }}
-                    {# Input title class input-title #}
-                    {{form_widget(formP.category, {'attr': {'class':'form-control'}})}}
-                    <span id="msg-errors" class="error text-danger">{{ form_errors(formP.category) }}</span>
-                </div>
-                <div class="input-formP col-12 mb-2">
-                    {# Label #}
-
-                    <label class="d-flex justify-content-end">
-                        {{ form_widget(formP.isPublished, {'attr': {'class': 'filled-in '}}) }}
-                        <span class="checkbox-published ml-1">Publier</span>
-                    </label>
-                    <span id="msg-errors" class="error text-danger">{{ form_errors(formP.isPublished) }}</span>
-                </div>
-
-                    <div class="input-formP submit-formP col-12 mb-2 d-flex justify-content-end">
-                        <input type="submit" name="" value="Enregistrer" class="btn btn-dark btn-submit-form">
+                        {# {{form_widget(formP)}} #}
+                    <div class="input-formP col-12 mb-2">
+                        {# Label #}
+                        {{ form_label(formP.nom, 'Nom du produit') }}
+                        {# Input title class input-title #}
+                        {{form_widget(formP.nom, {'attr': {'class':'form-control'}})}}
+                        <span id="msg-errors" class="error text-danger">{{ form_errors(formP.nom) }}</span>
                     </div>
-                                       
-                {{form_end(formP)}}
+                    <div class="input-formP col-12 mb-2">
+                        {# Label #}
+                        {{ form_label(formP.image, 'Image') }}
+                        {# Input title class input-title #}
+                        {{form_widget(formP.image, {'attr': {'class':'form-control'}})}}
+                        <span id="msg-errors" class="error text-danger">{{ form_errors(formP.image) }}</span>
+                    </div>
+                    <div class="input-formP col-12 mb-2">
+                        {# Label #}
+                        {{ form_label(formP.description, 'Decription') }}
+                        {# Input title class input-title #}
+                        {{form_widget(formP.description, {'attr': {'class':'form-control'}})}}
+                        <span id="msg-errors" class="error text-danger">{{ form_errors(formP.description) }}</span>
+                    </div>
+                    <div class="input-formP col-12 mb-2">
+                        {# Label #}
+                        {{ form_label(formP.category, 'Catégorie du produit') }}
+                        {# Input title class input-title #}
+                        {{form_widget(formP.category, {'attr': {'class':'form-control'}})}}
+                        <span id="msg-errors" class="error text-danger">{{ form_errors(formP.category) }}</span>
+                    </div>
+                    <div class="input-formP col-12 mb-2">
+                        {# Label #}
+                        {{ form_label(formP.price, 'Prix') }}
+                        {# Input title class input-title #}
+                        {{form_widget(formP.price, {'attr': {'class':'form-control'}})}}
+                        <span id="msg-errors" class="error text-danger">{{ form_errors(formP.category) }}</span>
+                    </div>
+                    <div class="input-formP col-12 mb-2">
+                        {# Label #}
 
-    </div>
-</div>
+                        <label class="d-flex justify-content-end">
+                            {{ form_widget(formP.isPublished, {'attr': {'class': 'filled-in '}}) }}
+                            <span class="checkbox-published ml-1">Publier</span>
+                        </label>
+                        <span id="msg-errors" class="error text-danger">{{ form_errors(formP.isPublished) }}</span>
+                    </div>
+
+                        <div class="input-formP submit-formP col-12 mb-2 d-flex justify-content-end">
+                            <input type="submit" name="" value="Enregistrer" class="btn btn-dark btn-submit-form">
+                        </div>
+                                           
+                    {{form_end(formP)}}
 
 
 {% endblock %}

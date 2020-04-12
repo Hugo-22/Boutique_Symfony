@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}Connexion | {{parent() }}{% endblock %}
 
 {% block content %}
 <section class="sign-in">
@@ -8,7 +8,7 @@
         <div class="signin-content">
             <div class="signin-image">
                 <figure><img src="images/signin-image.jpg" alt="sing up image"></figure>
-                <a href="#" class="signup-image-link">S'inscrire</a>
+                <a href="/inscription" class="signup-image-link">S'inscrire</a>
             </div>
 
             <div class="signin-form">
@@ -21,7 +21,7 @@
         
             <form action="{{path('login')}}" method="post">
                 <div class="form-group">
-                    <label for="">Login : </label>  
+                    <label for="">Login : </label>
                     <input type="text" name="_username" required class="form-control">
                 </div>
         
@@ -29,7 +29,7 @@
                     <label for="">Mot de passe : </label>
                     <input type="password" name="_password" required class="form-control">
                 </div>
-                <input type="submit" value="se connecter" class="btn btn-primary">
+                <input type="submit" value="se connecter" class="btn btn-dark">
             </form>
             </div>
         </div>

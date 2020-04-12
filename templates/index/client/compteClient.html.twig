@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Espace client | {{ parent() }}{% endblock %}
+
+{% block content %}
+
+<div class="container text-center">
+    <h1 class="text-center mt-4">Mes informations</h1>
+
+    <div class="row">
+        <div class="col-6 d-flex flex-column align-items-end">
+            <p>Nom</p>
+            <p>Prénom</p>
+            <p>Mail</p>
+            <p>Adresse Postale</p>
+            <p>Code Postal</p>
+            <p>Ville</p>
+            <p>Téléphone</p>
+        </div>
+        
+        <div class="col-6 d-flex flex-column align-items-start">
+         
+            <p>{{ user.nom }}</p>
+            <p>{{ user.prenom }}</p>
+            <p>{{ user.mail }}</p>
+            <p>{{ user.adresse }}</p>
+            <p>{{ user.cp }}</p>
+            <p>{{ user.ville }}</p>
+            <p>{{ user.phone }}</p>
+        </div>
+
+    <a href="{{path('update_infos')}}" class="btn btn-success">Modifier mes infos</a>
+
+    <a href="{{path('update_password')}}" class="btn btn-primary">Modifier mon mot de passe</a>
+    </div>
+
+{% endblock %}

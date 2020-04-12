@@ -71,11 +71,6 @@ class User implements UserInterface
      */
     private $phone;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="User")
-     */
-    private $orders;
-
 
      /**
      * @Assert\EqualTo(propertyPath="password", message="les mdp ne correspondent pas")
@@ -87,6 +82,17 @@ class User implements UserInterface
      */
     private $roles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="user")
+     */
+    private $orders;
+
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
+
+
     public function getVerifPassword(): ?string
     {
         return $this->verifPassword;
@@ -97,11 +103,6 @@ class User implements UserInterface
         $this->verifPassword = $verifPassword;
 
         return $this;
-    }
-
-    public function __construct()
-    {
-        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -217,6 +218,30 @@ class User implements UserInterface
         return $this;
     }
 
+
+
+    public function eraseCredentials()
+    {
+
+    }
+
+    public function getSalt()
+    {
+        
+    }
+
+    public function getRoles(): ?array
+    {
+        return [$this->roles];
+    }
+
+    public function setRoles(string $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Order[]
      */
@@ -244,28 +269,6 @@ class User implements UserInterface
                 $order->setUser(null);
             }
         }
-
-        return $this;
-    }
-
-    public function eraseCredentials()
-    {
-
-    }
-
-    public function getSalt()
-    {
-        
-    }
-
-    public function getRoles(): ?array
-    {
-        return [$this->roles];
-    }
-
-    public function setRoles(string $roles): self
-    {
-        $this->roles = $roles;
 
         return $this;
     }

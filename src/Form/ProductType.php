@@ -22,6 +22,7 @@ class ProductType extends AbstractType
                 'data_class' => null
             ])
             ->add('description')
+            ->add('price')
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => "nom", 

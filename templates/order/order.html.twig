@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block content %}
+
+        
+<div class="container">
+
+<h1 class="text-center mt-4">Commande</h1>
+  
+<div class="row mt-4">
+    <div class="col-lg-6">
+
+        <h3>Adresse de facturation</h3>
+        <p> {{user.nom}} {{user.prenom}} </p>
+        <p> {{user.adresse}} </p>
+        <p> {{user.ville}} {{user.cp}} </p>
+    </div>
+    <div class="col-lg-6">
+
+        <h3>Adresse de livraison</h3>
+        <p> {{user.nom}} {{user.prenom}} </p>
+        <p> {{user.adresse}} </p>
+        <p> {{user.ville}} {{user.cp}} </p>
+    </div>
+    
+    <h3 class="mt-5">Récapitulatif de la commande</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td><img src="{{ asset('uploads/') ~ item.product.image }}" alt="items" width="50" height="50">
+                {{ item.product.nom }}</td>
+                <td>{{ item.product.price }}€</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.product.price * item.quantity }}€</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{path('order_confirm')}}">Valider la commande</a>
+</div>
+
+</div>
+
+{% endblock %}

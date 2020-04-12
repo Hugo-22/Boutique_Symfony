@@ -1,13 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des produits{% endblock %}
-
+{% block title %}Liste des clients | Admin | {{ parent() }}{% endblock %}
+{% block header %}
+    {% include "includes/adminNavBar.html.twig" %}
+{% endblock %}
 {% block content %}
-
-<div class="container text-center">
-    <h1 class="text-center mt-4">Clients</h1>
-
-            <table class="table table-hover mt-5 text">
+	<div class="container-fluid ">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-5 mb-3">
+                    <h1> Listing des clients</h1>
+                </div>
+            </div>
+            <div class="row">
+                <table class="col-12 table table-hover  mt-5 text">
                     <thead class="thead-dark text-uppercase">
                         <tr>
                             <th class="text-center">Nom</th>
@@ -25,11 +31,13 @@
                         <td class="text-center font-weight-bold">{{ user.prenom }}</td>
                         <td class="text-center font-weight-bold">{{ user.mail }}</td>
                         <td class="text-center font-weight-bold">
-                            <a href="{{path('details_user', {'id' : user.id})}}">Détails</a>
+                            <a href="{{path('details_user', {'id' : user.id})}}"><img src="{{asset('images/' ~ 'show.svg')}}" width="40" height="40" alt="détails"/></a>
                         </td>
                     </tr>
                     {% endfor %}
-                </table>
+                </table>            
+            </div>
+        </div>  
     </div>
 
 

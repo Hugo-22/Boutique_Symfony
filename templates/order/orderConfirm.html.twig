@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block content %}
+
+<h1>Votre commande est validé</h1>
+<div class="container">
+
+    {# {{user.nom}}
+    {{user.prenom}} #}
+
+    <h2>Merci pour votre commande {{order.user.nom}}</h2>
+
+    <a href="">Voir mes commandes</a>
+
+    {% for item in items %}
+        {{item.product.nom}} => {{ item.quantity}}
+    {% endfor %}
+
+   
+
+    {# {{order_detail.product.nom}}
+    {{order_detail.product.price}}
+    {{order_detail.quantity}} #}
+    
+   
+
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello IndexController!{% endblock %}
+{% block title %}{{ product.nom }} | {{ parent() }}{% endblock %}
 
 {% block content %}
 
@@ -8,26 +8,25 @@
     <div class="container">
         <div class="row">
         {# boucle for afin d'afficher les articles #}
-            <div class="col-12 col-sm-6 col-lg-3  text-center my-5">
-                <div class="card">
+            <div class="col-12 mt-5 mb-3">
+                <h1>{{ product.nom }}</h1>
+            </div>
+        </div>
+        <div class=" row">
+            <div class="col-6">
                 {# gestion de l'url : dossier uploads/table article col picture #}
-                    <div class="image-carte">
-                        <img src="{{ asset('uploads/' ~ product.image) }}" class="card-img-top" width="256" height="208" title="{{ product.nom }}" alt="image {{ product.nom  }}">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.nom}}</h5>
-                        {# date de publication que l'on met au format jj/mm/aa #}
-                        <p class="card-text card-decription text-muted mb-0">{{product.description }}</p>                               
-                        {# <h6 class="card-subtitle mb-2 text-muted text-right"></h6> #}
-                        {# on retourne le chemin canonique absolu avec path de l'article et on ajoute l'id de l'article #}
-                    </div>
-                    <a href="{{path('add_panier', {'id' : product.id })}}">Add</a>
-                </div>
+                <img src="{{ asset('uploads/' ~ product.image) }}" class="card-img-top" width="256" height="208" title="{{ product.nom }}" alt="image {{ product.nom  }}">
+            </div>
+            <div class="col-6">
+                
+                {{product.description}}
+                {{product.price}}€
+                <br>
+                <a href="{{path('add_panier', {'id' : product.id })}}">Ajouter</a>
             </div>
         </div>
 
     </div>
 </div>
-
 
 {% endblock %}

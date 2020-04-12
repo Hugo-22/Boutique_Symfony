@@ -1,51 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des produits{% endblock %}
-
+{% block title %}Ajouter un produit | Admin | {{ parent() }}{% endblock %}
+{% block header %}
+    {% include "includes/adminNavBar.html.twig" %}
+{% endblock %}
 {% block content %}
-
-<div class="container text-center">
-    <h1 class="text-center mt-4">Produits</h1>
-
-        <a class="text-decoration-none" href="{{path('add_product')}}"><i class="fas fa-plus mr-2"></i>Nouveau produit</a>
-            <table class="table table-hover mt-5 text">
-                    <thead class="thead-dark text-uppercase">
-                        <tr>
-                            <th class="text-center">Image</th>
-                            <th class="text-center">Catégorie</th>
-                            <th class="text-center">Nom</th>
-                            <th class="text-center">Description</th>
-                            <th class="text-center">En ligne</th>
-                            <th class="text-center">Modifier</th>
-                            <th class="text-center">Supprimer</th>
-                        </tr>
-                    </thead>
+	<div class="container-fluid ">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-5 mb-3">
+                    <h1> Listing des produits</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 d-flex justify-content-start">
+                    <a class="text-decoration-none add-category" href="{{path('admin')}}"><i class="fas fa-arrow-left mr-2"></i>Dashboard</a>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <a class="text-decoration-none add-product" href="{{path('add_product')}}"><i class="fas fa-plus mr-2"></i>Nouveau produit</a>
+                </div>
+                <table class="table table-hover mt-3 text col-12">
+                        <thead class="thead-dark  title-listing">
+                            <tr>
+                                <th class="text-center text-nowrap">Image</th>
+                                <th class="text-center text-nowrap">Nom</th>
+                                <th class="text-center text-nowrap">Catégorie</th>
+                                <th class="text-center text-nowrap">Description</th>
+                                <th class="text-center text-nowrap">En ligne</th>
+                                <th class="text-center text-nowrap">Modifier</th>
+                                <th class="text-center text-nowrap">Supprimer</th>
+                            </tr>
+                        </thead>
+                            
+                        {% for product in products %}
                         
-                    {% for product in products %}
-                    
-                    <tr>
-                        <td class="text-center font-weight-bold"> <img src="{{asset('uploads/' ~ product.image)}}" alt="" width="50" height="50"> </td>
-                        <td class="text-center font-weight-bold">{{ product.category.nom }}</td>
-                        <td class="text-center font-weight-bold">{{ product.nom }}</td>
-                        <td class="text-center font-weight-bold">{{ product.description }}</td>
-                        <td class="text-center font-weight-bold">
-                            {% if product.isPublished %}
-                                Oui
-                                {% else %}
-                                Non
-                                {% endif %}
-                        </td>
-                        <td class="text-center"><a class="both input-style color-blue" href="{{ path('product_update', {'id' : product.id}) }}">Update</a></td>
-                        <td class="text-center"><form action="{{path('delete_product', {'id' : product.id})}}" method="post" class="col" onsubmit="return confirm('Voulez-vous vraiment supprimer ?');">
-                            <input type="hidden" name="_method" value="SUP">
-                            <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ product.id)}}">
-                            <input type="submit" value="Supprimer" class="input-style both input-style-color">
-                        </form></td>
+                        <tr>
+                            <td class="text-center "> <img src="{{asset('uploads/' ~ product.image)}}" alt="" width="50" height="50"> </td>
+                            <td class="text-center font-weight-bold">{{ product.nom }}</td>
+                            <td class="text-center ">{{ product.category.nom }}</td>
+                            <td class="text-center ">{{ product.description }}</td>
+                            <td class="text-center">
+                                {% if product.isPublished %}
+                                    Oui
+                                    {% else %}
+                                    Non
+                                    {% endif %}
+                            </td>
+                            <td class="text-center"><a class="" href="{{ path('product_update', {'id' : product.id}) }}"><img src="{{asset('images/' ~ 'edit.svg')}}" width="30" height="30" alt="Modifier"/></a></td>
+                            <td class="text-center">
+                                <form action="{{path('delete_product', {'id' : product.id})}}" method="post" class="col" onsubmit="return confirm('Voulez-vous vraiment supprimer ?');">
+                                    <input type="hidden" name="_method" value="SUP">
+                                    <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ product.id)}}">
+                                    <input type="submit" value="Supprimer" class="btn btn-outline-danger btn-submit-form">
+                                </form>
+                            </td>
 
-                    </tr>
-                    {% endfor %}
-                </table>
+                        </tr>
+                        {% endfor %}
+                    </table>
+            </div>
+
+        </div>
     </div>
-
-
 {% endblock %}

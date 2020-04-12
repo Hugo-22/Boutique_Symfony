@@ -165,7 +165,6 @@ input[type=radio] {
   -ms-appearance: radio !important; }
 
 img {
-  max-width: 100%;
   height: auto; }
 
 figure {
@@ -262,6 +261,11 @@ body {
 .signup-image {
   margin: 0 55px; }
 
+
+.img-signup {
+  width: 420px !important;
+  max-width: unset !important;
+}
 .form-title {
   margin-bottom: 33px; }
 
