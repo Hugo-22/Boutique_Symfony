@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos commandes | {{ parent() }}{% endblock %}
+{% block header %}
+    {% include "includes/adminNavBar.html.twig" %}
+{% endblock %}
+{% block content %}
+	<div class="container-fluid ">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-5 mb-3">
+                    <h1>Vos commandes</h1>
+                </div>
+            </div>
+            <div class="row">
+                <table class="col-12 table table-hover  mt-5 text">
+                    <thead class="thead-dark text-uppercase">
+                        <tr>
+                            <th class="text-center">Numéro de commande</th>
+                            <th class="text-center">Date d'achat</th>
+                            <th class="text-center">Détails</th>
+                            
+                        </tr>
+                    </thead>
+                        
+                    {% for order in orders %}
+                    
+                    <tr>
+                        <td class="text-center font-weight-bold"> {{order.id}} </td>
+                        <td class="text-center font-weight-bold">{{ order.date|date("d/m/Y") }}</td>
+                        <td class="text-center font-weight-bold">
+                            <a href="{{path('details_order', {'id' : order.id})}}"/>Détails</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>            
+            </div>
+        </div>  
+    </div>
+
+
+{% endblock %}

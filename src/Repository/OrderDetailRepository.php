@@ -19,22 +19,22 @@ class OrderDetailRepository extends ServiceEntityRepository
         parent::__construct($registry, OrderDetail::class);
     }
 
-    // /**
+    //
     //  * @return OrderDetail[] Returns an array of OrderDetail objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    //
+    
+    public function findDetailsOrder($id)
     {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.orderId = :val')
+            ->setParameter('val', $id)
+            ->orderBy('a.id', 'ASC')
+            // ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?OrderDetail

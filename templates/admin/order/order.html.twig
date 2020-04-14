@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}test{% endblock %}
+
+{% block content %}
+
+        <td class="text-center font-weight-bold">{{ order.User.nom }}</td>
+        <td class="text-center font-weight-bold">{{ order.User.prenom }}</td>
+        <td class="text-center font-weight-bold">{{ order.date |date("d/m/Y") }}</td> 
+        <td class="text-center font-weight-bold">{{ order.price }}</td>   
+
+{% endblock %}

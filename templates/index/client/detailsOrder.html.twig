@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos commandes | {{ parent() }}{% endblock %}
+{% block header %}
+    {% include "includes/adminNavBar.html.twig" %}
+{% endblock %}
+{% block content %}
+
+    {% for detail in details %}
+            {{detail.product.nom}}
+            {{detail.quantity}}
+            {{detail.price}}
+    {% endfor %}
+
+
+{% endblock %}

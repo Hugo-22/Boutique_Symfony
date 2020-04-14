@@ -3,35 +3,41 @@
 {% block title %} Espace client | {{ parent() }}{% endblock %}
 
 {% block content %}
+	 <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-5 mb-5">
+                    <h1 class="text-center mt-4">Mes informations</h1>
+                </div>
+            </div>
 
-<div class="container text-center">
-    <h1 class="text-center mt-4">Mes informations</h1>
-
-    <div class="row">
-        <div class="col-6 d-flex flex-column align-items-end">
-            <p>Nom</p>
-            <p>Prénom</p>
-            <p>Mail</p>
-            <p>Adresse Postale</p>
-            <p>Code Postal</p>
-            <p>Ville</p>
-            <p>Téléphone</p>
+            <div class="row">
+                <div class="col-6 d-flex flex-column align-items-end">
+                    <p>Nom</p>
+                    <p>Prénom</p>
+                    <p>Mail</p>
+                    <p>Adresse Postale</p>
+                    <p>Code Postal</p>
+                    <p>Ville</p>
+                    <p>Téléphone</p>
+                </div>
+                
+                <div class="col-6 d-flex flex-column align-items-start">
+                
+                    <p>{{ user.nom }}</p>
+                    <p>{{ user.prenom }}</p>
+                    <p>{{ user.mail }}</p>
+                    <p>{{ user.adresse }}</p>
+                    <p>{{ user.cp }}</p>
+                    <p>{{ user.ville }}</p>
+                    <p>{{ user.phone }}</p>
+                </div>
+                <div class="col-12 d-flex justify-content-center mt-3">
+                    <a href="{{path('update_infos')}}" class="btn btn-info mr-1">Modifier mes infos</a>
+                    <a href="{{path('update_password')}}" class="btn btn-danger ml-1">Modifier mon mot de passe</a>
+                    <a href="{{path('client_order')}}" class="btn btn-success ml-1">Voir mes commandes</a>
+                </div>
         </div>
-        
-        <div class="col-6 d-flex flex-column align-items-start">
-         
-            <p>{{ user.nom }}</p>
-            <p>{{ user.prenom }}</p>
-            <p>{{ user.mail }}</p>
-            <p>{{ user.adresse }}</p>
-            <p>{{ user.cp }}</p>
-            <p>{{ user.ville }}</p>
-            <p>{{ user.phone }}</p>
-        </div>
-
-    <a href="{{path('update_infos')}}" class="btn btn-success">Modifier mes infos</a>
-
-    <a href="{{path('update_password')}}" class="btn btn-primary">Modifier mon mot de passe</a>
     </div>
 
 {% endblock %}

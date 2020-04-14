@@ -12,7 +12,7 @@
 
     <h2>Merci pour votre commande {{order.user.nom}}</h2>
 
-    <a href="">Voir mes commandes</a>
+    <a href="{{path('client_order')}}">Voir mes commandes</a>
 
     {% for item in items %}
         {{item.product.nom}} => {{ item.quantity}}

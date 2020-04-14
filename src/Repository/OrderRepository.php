@@ -47,4 +47,15 @@ class OrderRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findOrdersByIdUser($id)
+    {
+        return $this->createQueryBuilder('id')
+            ->andWhere('id.user = :val')
+            ->setParameter('val', $id)
+            ->orderBy('id.id', 'ASC')
+            // ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

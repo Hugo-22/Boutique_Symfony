@@ -1,55 +1,56 @@
 {% extends 'base.html.twig' %}
- {% block stylesheets %}
-            <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-            <link rel="stylesheet" href="{{asset('css/main.css')}}">
-        {% endblock %}
+
 {% block title %} Espace client | {{ parent() }}{% endblock %}
-
 {% block content %}
-
-
-<section class="signup">
+<div class="container-fluid">
     <div class="container">
-        <div class="signup-content">
-            <div class="signup-form">
-                <h2 class="form-title">Modifier mes infos</h2>
+        <div class="row">
+            <div class="col-12 mt-5 mb-3">
+                <h1 class="form-title">Modifier mes infos</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-start">
+                <a class="text-decoration-none add-category" href="{{path('compte')}}"><i class="fas fa-arrow-left mr-2"></i>Retour au détail de mon compte</a>
+            </div>
+            <div class="col-12 d-flex justify-content-center form-modif-infos">
                 {{form_start(form)}}
 
-                    <div class="form-group">
-                        <label for=""><i class="fas fa-at"></i></label>
-                        {{form_row(form.mail, {'attr' : {'placeholder' : 'E-mail', 'class' : 'input'}, 'label' : false})}}
+                    <div class="form-group  d-flex mt-4">
+                        <label for="" class="icone-form"><i class="fas fa-at"></i> </label>
+                        {{form_widget(form.mail, {'attr' : {'placeholder' : 'E-mail', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <div class="form-group">
-                        <label for=""><i class="far fa-address-card"></i></label>
-                        {{form_row(form.nom, {'attr' : {'placeholder' : 'Nom', 'class' : 'input'}, 'label' : false})}}
+                    <div class="form-group  d-flex mt-4">
+                        <label for="" class="icone-form"><i class="far fa-address-card"></i> </label>
+                        {{form_widget(form.nom, {'attr' : {'placeholder' : 'Nom', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <div class="form-group">
-                        <label for=""><i class="far fa-address-card"></i></label>
-                        {{form_row(form.prenom, {'attr' : {'placeholder' : 'Prénom', 'class' : 'input'}, 'label' : false})}}
+                    <div class="form-group  d-flex mt-4">
+                        <label for="" class="icone-form"><i class="far fa-address-card"></i> </label>
+                        {{form_widget(form.prenom, {'attr' : {'placeholder' : 'Prénom', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <div class="form-group">
-                        <label for=""><i class="fas fa-map-marker-alt"></i></label>
-                        {{form_row(form.adresse, {'attr' : {'placeholder' : 'Adresse postale', 'class' : 'input'}, 'label' : false})}}
+                    <div class="form-group  d-flex mt-4">
+                        <label for="" class="icone-form"><i class="fas fa-map-marker-alt"></i> </label>
+                        {{form_widget(form.adresse, {'attr' : {'placeholder' : 'Adresse postale', 'class' : ' input'}, 'label' : false})}}
                     </div>
-                    <div class="form-group">
-                        <label for=""><i class="fas fa-map-marker-alt"></i></label>
-                        {{form_row(form.ville, {'attr' : {'placeholder' : 'Ville', 'class' : 'input'}, 'label' : false})}}
+                    <div class="form-group  d-flex mt-4">
+                        <label for="" class="icone-form"><i class="fas fa-map-marker-alt"></i> </label>
+                        {{form_widget(form.ville, {'attr' : {'placeholder' : 'Ville', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <div class="form-group">
-                        <label for=""><i class="fas fa-map-marker-alt"></i></label>
-                        {{form_row(form.cp, {'attr' : {'placeholder' : 'Code Postal', 'class' : 'input'}, 'label' : false})}}
+                    <div class="form-group  d-flex mt-4">
+                        <label for="" class="icone-form"><i class="fas fa-map-marker-alt"></i> </label>
+                        {{form_widget(form.cp, {'attr' : {'placeholder' : 'Code Postal', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <div class="form-group">
-                        <label for=""><i class="fas fa-mobile-alt"></i></label>
-                        {{form_row(form.phone, {'attr' : {'placeholder' : 'Téléphone', 'class' : 'input'}, 'label' : false})}}
+                    <div class="form-group  d-flex mt-4">
+                        <label for="" class="icone-form"><i class="fas fa-mobile-alt"></i> </label>
+                        {{form_widget(form.phone, {'attr' : {'placeholder' : 'Téléphone', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <input type="submit" value="Modifier" class="btn btn-success">
-                    {{form_end(form)}}
+                    <div class="mb-2 d-flex justify-content-center">
+                        <input type="submit" value="Modifier" class="btn btn-info">
+                    </div>
+                {{form_end(form)}}
             </div>
         </div>
     </div>
-</section>
+</div>
 
 {% endblock %}

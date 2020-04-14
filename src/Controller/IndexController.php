@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class IndexController extends AbstractController
 {
@@ -149,7 +148,7 @@ class IndexController extends AbstractController
     /**
      * @Route("/order/confirm", name="order_confirm")
      */
-    public function orderConfirm(SessionInterface $sessionInterface, ProductRepository $productRepository, UserRepository $userRepository, EntityManagerInterface $manager, OrderDetailRepository $orderDetailRepository) 
+    public function orderConfirm(SessionInterface $sessionInterface, ProductRepository $productRepository, UserRepository $userRepository, EntityManagerInterface $manager) 
     {
         $panier = $sessionInterface->get('panier', []);
 
@@ -161,33 +160,23 @@ class IndexController extends AbstractController
             ];
         }
         // dd($panierData['product'] => $productRepository->find($id));
-        $user = [$this->getUser()];
-        $findId = [];
-        foreach ($user as $id) {
+        // $user = [$this->getUser()];
+        // $findId = [];
+        // foreach ($user as $id) {
 
-            $findId = [
-                'id_user' => $userRepository->find($id)->getId()
-            ];
-        }
+        //     $findId = [
+        //         'id_user' => $userRepository->find($id)->getId()
+        //     ];
+        // }
         // dd($panierData[0]['quantity']);
-        $id_user = $findId['id_user'];
-        // dd($id_user);
-        // $osef = new User();
-        // $osef->getId();
-        // dd($osef);
-
+        // $id_user = $findId['id_user'];
 
         $order = new Order();
         $order->setDate(new \DateTime());
         $order->setUser($this->getUser());
-        // dd($this->getDoctrine()->getRepository(Order::class)->findAll());
         $manager->persist($order);
         $manager->flush();
 
-        // dd($order->getId());
-        // $order_id = $order->getId();
-        
-        // dd($order_detail->setOrderId($order));
         
         for ($i=0; $i < count($panierData); $i++) {
 
@@ -206,6 +195,46 @@ class IndexController extends AbstractController
             'items' => $panierData
         ]);
     }
+
+    // methods listing commandes
+    /**
+     * @Route("/client/order", name="client_order")
+     */
+    public function listOrder(OrderRepository $orderRepository)
+    {
+
+        $user = $this->getUser();
+        // $findId = [];
+        // foreach ($user as $id) {
+
+        //     $findId = [
+        //         'id_user' => $userRepository->find($id)->getId()
+        //     ];
+        // }
+        // $id_user = $findId['id_user'];
+        // dd($id_user);
+
+        $orders = $orderRepository->findOrdersByIdUser($user);
+
+        return $this->render('index/client/listOrder.html.twig', [
+            "orders" => $orders
+        ]);
+
+    }
+
+     /**
+     * @Route("/client/order/{id}", name="details_order")
+     */
+    public function detailsOrder(OrderDetailRepository $orderDetailRepository, $id)
+    {
+        $detailsOrder = $orderDetailRepository->findDetailsOrder($id);
+
+        return $this->render('index/client/detailsOrder.html.twig', [
+            "details" => $detailsOrder
+        ]);
+    }
+
+
 
     // methods Mon Compte
 
@@ -238,7 +267,6 @@ class IndexController extends AbstractController
             $manager->flush();
             return $this->redirectToRoute("compte");
         }
-
 
         return $this->render('index/client/updateInfosClient.html.twig', [
             "user" => $user,
