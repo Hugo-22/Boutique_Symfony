@@ -9,7 +9,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 mt-5 mb-3">
-                    <h1> Ajouter ou modifier une catégorie</h1>
+                    <h1>
+                    {% if isModif %}
+                    Modification de la catégorie
+                    {% else %}
+                        Ajout d'une nouvelle catégorie
+                    {% endif %}
+                    </h1>
                 </div>
             </div>
             {{form_start(formCat, {'attr': {'class':'row'}})}}

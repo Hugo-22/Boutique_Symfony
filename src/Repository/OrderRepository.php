@@ -58,4 +58,16 @@ class OrderRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findTotalByIdOrder($id): string
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.price = :val')
+            ->setParameter('val', $id)
+            ->orderBy('p.id', 'ASC')
+            // ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

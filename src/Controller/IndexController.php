@@ -92,7 +92,7 @@ class IndexController extends AbstractController
             $totalItem = $item['product']->getPrice() * $item['quantity'];
             $total += $totalItem;
         }
-
+        
 
         return $this->render('panier/panier.html.twig', [
             'items' => $panierData,
@@ -129,6 +129,14 @@ class IndexController extends AbstractController
                 'quantity' => $quantity
             ];
         }
+
+        $total = 0;
+
+        foreach ($panierData as $item) {
+            $totalItem = $item['product']->getPrice() * $item['quantity'];
+            $total += $totalItem;
+        }
+
         $user = $this->getUser();
         // dd($user);
 
@@ -140,7 +148,8 @@ class IndexController extends AbstractController
 
             return $this->render('order/order.html.twig', [
                 'items' => $panierData,
-                'user' => $user
+                'user' => $user,
+                'total' => $total
                 ]);
             }
     }
@@ -148,7 +157,7 @@ class IndexController extends AbstractController
     /**
      * @Route("/order/confirm", name="order_confirm")
      */
-    public function orderConfirm(SessionInterface $sessionInterface, ProductRepository $productRepository, UserRepository $userRepository, EntityManagerInterface $manager) 
+    public function orderConfirm(SessionInterface $sessionInterface, ProductRepository $productRepository, EntityManagerInterface $manager) 
     {
         $panier = $sessionInterface->get('panier', []);
 
@@ -171,9 +180,17 @@ class IndexController extends AbstractController
         // dd($panierData[0]['quantity']);
         // $id_user = $findId['id_user'];
 
+        $total = 0;
+
+        foreach ($panierData as $item) {
+            $totalItem = $item['product']->getPrice() * $item['quantity'];
+            $total += $totalItem;
+        }
+
         $order = new Order();
         $order->setDate(new \DateTime());
         $order->setUser($this->getUser());
+        $order->setPrice($total);
         $manager->persist($order);
         $manager->flush();
 
@@ -190,9 +207,10 @@ class IndexController extends AbstractController
             $manager->flush();
         }
 
+        $sessionInterface->remove('panier');
+
         return $this->render('order/orderConfirm.html.twig', [
-            'order' => $order,
-            'items' => $panierData
+            'order' => $order
         ]);
     }
 

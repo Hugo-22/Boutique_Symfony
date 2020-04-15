@@ -9,7 +9,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 mt-5 mb-3">
-                    <h1>Ajouter ou modifier un produit</h1>
+                    <h1>
+                    {% if isModif %}
+                    Modification du produit
+                    {% else %}
+                        Ajout d'un nouveau produit
+                    {% endif %}
+                    </h1>
                 </div>
                 {{form_start(formP, {'attr': {'class':'row'}})}}
                         {# {{form_widget(formP)}} #}

@@ -1,12 +1,53 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}test{% endblock %}
+ {% extends 'base.html.twig' %}
 
+{% block title %}Admin | Listing des commandes | {{ parent() }}{% endblock %}
+{% block header %}
+    {% include "includes/adminNavBar.html.twig" %}
+{% endblock %}
 {% block content %}
 
-        <td class="text-center font-weight-bold">{{ order.User.nom }}</td>
-        <td class="text-center font-weight-bold">{{ order.User.prenom }}</td>
-        <td class="text-center font-weight-bold">{{ order.date |date("d/m/Y") }}</td> 
-        <td class="text-center font-weight-bold">{{ order.price }}</td>   
+	<div class="container-fluid ">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-5 mb-3">
+                    <h1>Listing des commandes</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 d-flex justify-content-start">
+                    <a class="text-decoration-none add-category" href="{{path('admin')}}"><i class="fas fa-arrow-left mr-2"></i>Retour au Dashboard de l'admin</a>
+                </div>
+                <table class="table table-hover mt-3 text col-12">
+                        <thead class="thead-dark  title-listing">
+                            <tr>
+                                <th class="text-center">Numéro de commande</th>
+                                <th class="text-center">Client</th>
+                                <th class="text-center">Date</th>
+                                <th class="text-center">Montant</th>
+                                <th class="text-center">Détails</th>
+
+                            </tr>
+                        </thead>
+                            
+                        {% for order in orders %}
+                        
+                        <tr>
+                            
+                            <td class="text-center font-weight-bold">{{ order.id}}</td>
+                            <td class="text-center font-weight-bold">{{ order.user.nom}} {{ order.user.prenom}}</td>
+                            <td class="text-center font-weight-bold">{{ order.date |date("d/m/Y") }}</td> 
+                            <td class="text-center font-weight-bold"> {{order.price}}€ </td> 
+
+                           <td class="text-center font-weight-bold detail"><a href="{{path('details_order_user', {'id' : order.id})}}"> <i class="fas fa-search-plus"></i></a></td>
+
+                        </tr>
+                        {% endfor %}
+                    </table>
+            </div>
+            
+        </div>
+    </div>
+
 
 {% endblock %}

@@ -9,10 +9,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 mt-5 mb-3">
+                 {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{message}}
+                </div>
+            {% endfor %}
+            <div class="row">
                     <h1> Listing des produits</h1>
                 </div>
             </div>
-            <div class="row">
                 <div class="col-6 d-flex justify-content-start">
                     <a class="text-decoration-none add-category" href="{{path('admin')}}"><i class="fas fa-arrow-left mr-2"></i>Dashboard</a>
                 </div>
@@ -26,6 +31,7 @@
                                 <th class="text-center text-nowrap">Nom</th>
                                 <th class="text-center text-nowrap">Catégorie</th>
                                 <th class="text-center text-nowrap">Description</th>
+                                <th class="text-center text-nowrap">Prix</th>
                                 <th class="text-center text-nowrap">En ligne</th>
                                 <th class="text-center text-nowrap">Modifier</th>
                                 <th class="text-center text-nowrap">Supprimer</th>
@@ -39,6 +45,7 @@
                             <td class="text-center font-weight-bold">{{ product.nom }}</td>
                             <td class="text-center ">{{ product.category.nom }}</td>
                             <td class="text-center ">{{ product.description }}</td>
+                            <td class="text-center ">{{ product.price }}€</td>
                             <td class="text-center">
                                 {% if product.isPublished %}
                                     Oui

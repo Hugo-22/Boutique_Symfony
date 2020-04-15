@@ -11,6 +11,7 @@ use App\Repository\UserRepository;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\OrderDetailRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,16 +57,19 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-
+            // si modif = true nous sommes dans le cas de la modification, si false on add un new élément 
+            $modif = $category->getId() !== null;
+            // dd($modif);
             $manager->persist($category);
             $manager->flush();
-
+            $this->addFlash("success", ($modif) ?  "La modification à été effectuée !" : "L'ajout à été effectuée !");
             return $this->redirectToRoute('liste_cat');
         }
 
         return $this->render('admin/category/add/newCategory.html.twig', [
             "category" => $category,
-            "formCat" => $form->createView()
+            "formCat" => $form->createView(),
+            "isModif" => $category->getId() !== null
         ]);
     }
 
@@ -77,12 +81,10 @@ class AdminController extends AbstractController
         if($this->isCsrfTokenValid("SUP".$category->getId(), $request->get('_token'))) {
             $objectManager->remove($category);
             $objectManager->flush();
-            $this->addFlash('success', "L'action a été effectué");
+            $this->addFlash('success', "La suppression à été effectuée !");
             return $this->redirectToRoute("liste_cat");
         }
      }
-
-
 
     //  METHODS PRODUITS
 
@@ -113,6 +115,8 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()) {
+            $modif = $product->getId() !== null;
+
             // $product->setIsPublished(true);
 
              // traitement de l'image
@@ -133,13 +137,14 @@ class AdminController extends AbstractController
 
             $manager->persist($product);
             $manager->flush();
-
+            $this->addFlash("success", ($modif) ?  "La modification à été effectuée !" : "L'ajout à été effectuée !");
             return $this->redirectToRoute("liste_product");
         }
 
         return $this->render('admin/product/add/newProduct.html.twig', [
             "product" => $product,
-            "formP" => $form->createView()
+            "formP" => $form->createView(),
+            "isModif" => $product->getId() !== null
         ]);
     }
 
@@ -151,7 +156,7 @@ class AdminController extends AbstractController
         if($this->isCsrfTokenValid("SUP".$product->getId(), $request->get('_token'))) {
             $objectManager->remove($product);
             $objectManager->flush();
-            $this->addFlash('success', "L'action a été effectué");
+            $this->addFlash('success', "La suppression à été effectuée ");
              return $this->redirectToRoute("liste_product");
         }
      }
@@ -175,7 +180,7 @@ class AdminController extends AbstractController
     public function listClient(UserRepository $userRepository)
     {
 
-        $users = $userRepository->findAll();
+        $users = $userRepository->findUser('ROLE_USER');
 
         return $this->render('admin/user/user.html.twig', [
             "users" => $users
@@ -185,7 +190,7 @@ class AdminController extends AbstractController
     // methods orders 
 
      /**
-     * @Route("/admin/order", name="")
+     * @Route("/admin/order", name="admin_orders")
      */
     public function listOrder(OrderRepository $orderRepository)
     {
@@ -193,8 +198,25 @@ class AdminController extends AbstractController
         $orders = $orderRepository->findAll();
 
         return $this->render('admin/order/order.html.twig', [
-            "order" => $orders        
+            "orders" => $orders
         ]);
     }
 
+     /**
+     * @Route("/admin/order/{id}", name="details_order_user")
+     */
+    public function detailsOrderClient(OrderRepository $orderRepository, OrderDetailRepository $orderDetailRepository, $id)
+    {
+        $detailsOrder = $orderDetailRepository->findDetailsOrder($id);
+        // $totalOrder = $orderRepository->findTotalByIdOrder($id);
+
+
+
+        // $tt = strval($totalOrder);
+        // dd($tt);
+
+        return $this->render('admin/order/orderDetail.html.twig', [
+            "details" => $detailsOrder,
+        ]);
+    }
 }

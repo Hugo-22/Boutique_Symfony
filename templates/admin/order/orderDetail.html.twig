@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Infos Clients | Admin | {{ parent() }}{% endblock %}
+{% block header %}
+    {% include "includes/adminNavBar.html.twig" %}
+{% endblock %}
+{% block content %}
+	<div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-5 mb-3">
+                    <h1>Détails commande N°{{details[0].orderId.id}}</h1>
+                
+                    <p><span class="font-weight-bold">Client : </span>{{details[0].orderId.user.nom}} {{details[0].orderId.user.prenom}}</p>
+                    <p><span class="font-weight-bold">Id client : </span>{{details[0].orderId.user.id}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 d-flex justify-content-start">
+                    <a class="text-decoration-none add-category" href="{{path('admin_orders')}}"><i class="fas fa-arrow-left mr-2"></i>Retour au listing des commandes</a>
+                </div>
+                
+                <div class="col-12 d-flex flex-column align-items-end font-weight-bold">
+                    <table class="table table-hover  mt-3 text">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th colspan="2" class="pl-4">Produit</th>
+                                <th class="text-center">Quantité</th>
+                                <th class="text-center">Prix</th>
+                                <th class="text-center"> Total /produit</th>
+                            </tr>
+                        </thead>
+                        {% for detail in details %}
+                            <tr>
+                                <td class="text-center font-weight-bold">  <img src="{{asset('uploads/' ~ detail.product.image)}}" alt="" width="50" height="50"></td>
+                                <td class="text-center font-weight-bold"> {{detail.product.nom}} </td>
+                                <td class="text-center font-weight-bold">{{detail.quantity}}</td>
+                                <td class="text-center ">{{detail.price}}€  </td>
+                                <td class="text-center font-weight-bold">{{ detail.price * detail.quantity }}€</td>
+                            </tr>
+                        {% endfor %}
+                        <tfoot>
+                            <tr class="">
+                                <td colspan="4" class="font-weight-bold text-right">Total :</td>
+                                <td class="font-weight-bold ">
+                                {# résultat du total #}
+                                {# {{ total }} € #}
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>   
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

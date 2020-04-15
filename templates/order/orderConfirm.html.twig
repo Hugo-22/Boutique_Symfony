@@ -3,27 +3,28 @@
 {% block title %}Panier{% endblock %}
 
 {% block content %}
-
-<h1>Votre commande est validé</h1>
-<div class="container">
-
-    {# {{user.nom}}
-    {{user.prenom}} #}
-
-    <h2>Merci pour votre commande {{order.user.nom}}</h2>
-
-    <a href="{{path('client_order')}}">Voir mes commandes</a>
-
-    {% for item in items %}
+<div class="container-fluid">
+    <div class="container">
+        <div class="row  mt-5 mb-5 text-center">
+            <div class="col-12">
+                <h1 class="">Votre commande est validée !</h1>
+            </div>
+        </div>  
+        <div class="row  mt-5 mb-5 text-center">
+            <div class="col-12">
+                <p>Merci pour votre commande, {{order.user.nom}}</p>
+                 <div class="">
+                    <a class="text-decoration-none add-category mt-3 mr-5" href="{{path('index')}}"><i class="fas fa-arrow-left mr-2"></i>Retour à la boutique</a>
+                    <a href="{{ path('compte')}}" class="btn btn-info ml-5">Voir mes commandes</a>
+                </div>         
+            </div>
+        </div>  
+    </div>
+</div>
+{#  {% for item in items %}
         {{item.product.nom}} => {{ item.quantity}}
-    {% endfor %}
+    {% endfor %} #}
 
-   
-
-    {# {{order_detail.product.nom}}
-    {{order_detail.product.price}}
-    {{order_detail.quantity}} #}
-    
    
 
 {% endblock %}

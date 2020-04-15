@@ -79,13 +79,13 @@ class OrderDetail
 
         return $this;
     }
-
-   
+    
 
     public function getOrderId(): ?Order
     {
         return $this->orderId;
     }
+
 
     public function setOrderId(?Order $orderId): self
     {

@@ -1,68 +1,74 @@
 {% extends 'base.html.twig' %}
-        {% block stylesheets %}
-            <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-            <link rel="stylesheet" href="{{asset('css/main.css')}}">
-        {% endblock %}
+
+{% block title %}Inscription | {{ parent() }}{% endblock %}
 
 {% block content %}
-
-<section class="signup">
-    <div class="container">
-        <div class="signup-content">
-            <div class="signup-form">
-                <h2 class="form-title">Inscription</h2>
-                {{form_start(form)}}
-
-                    <div class="form-group">
+	<div class="container-fluid ">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-5 mb-3">
+                    <h1>Inscription</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    {{form_start(form)}}
+                    <div class="form-group d-flex mt-2">
                         <label for=""><i class="fas fa-user"></i></label>
-                        {{form_row(form.username, {'attr' : {'placeholder' : 'Pseudo', 'class' : 'input'}, 'label' : false})}}
+                        {{form_widget(form.username, {'attr' : {'placeholder' : 'Pseudo', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <div class="form-group">
+                    <div class="form-group d-flex mt-2">
                         <label for=""><i class="fas fa-lock"></i></label>
-                        {{form_row(form.password, {'attr' : {'placeholder' : 'Mot de passe', 'class' : 'input'}, 'label' : false})}}
+                        {{form_widget(form.password, {'attr' : {'placeholder' : 'Mot de passe', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <div class="form-group">
+                    <div class="form-group d-flex mt-2">
                         <label for=""><i class="fas fa-lock"></i></label>
-                        {{form_row(form.verifPassword, {'attr' : {'placeholder' : 'Confirmation', 'class' : 'input'}, 'label' : false})}}
+                        {{form_widget(form.verifPassword, {'attr' : {'placeholder' : 'Confirmation', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <div class="form-group">
+                    <div class="form-group d-flex mt-2">
                         <label for=""><i class="fas fa-at"></i></label>
-                        {{form_row(form.mail, {'attr' : {'placeholder' : 'E-mail', 'class' : 'input'}, 'label' : false})}}
+                        {{form_widget(form.mail, {'attr' : {'placeholder' : 'E-mail', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <div class="form-group">
+                    <div class="form-group d-flex mt-2">
                         <label for=""><i class="far fa-address-card"></i></label>
-                        {{form_row(form.nom, {'attr' : {'placeholder' : 'Nom', 'class' : 'input'}, 'label' : false})}}
+                        {{form_widget(form.nom, {'attr' : {'placeholder' : 'Nom', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <div class="form-group">
+                    <div class="form-group d-flex mt-2">
                         <label for=""><i class="far fa-address-card"></i></label>
-                        {{form_row(form.prenom, {'attr' : {'placeholder' : 'Prénom', 'class' : 'input'}, 'label' : false})}}
+                        {{form_widget(form.prenom, {'attr' : {'placeholder' : 'Prénom', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <div class="form-group">
+                    <div class="form-group d-flex mt-2">
                         <label for=""><i class="fas fa-map-marker-alt"></i></label>
-                        {{form_row(form.adresse, {'attr' : {'placeholder' : 'Adresse postale', 'class' : 'input'}, 'label' : false})}}
+                        {{form_widget(form.adresse, {'attr' : {'placeholder' : 'Adresse postale', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <div class="form-group">
+                    <div class="form-group d-flex mt-2">
                         <label for=""><i class="fas fa-map-marker-alt"></i></label>
-                        {{form_row(form.ville, {'attr' : {'placeholder' : 'Ville', 'class' : 'input'}, 'label' : false})}}
+                        {{form_widget(form.ville, {'attr' : {'placeholder' : 'Ville', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <div class="form-group">
+                    <div class="form-group d-flex mt-2">
                         <label for=""><i class="fas fa-map-marker-alt"></i></label>
-                        {{form_row(form.cp, {'attr' : {'placeholder' : 'Code Postal', 'class' : 'input'}, 'label' : false})}}
+                        {{form_widget(form.cp, {'attr' : {'placeholder' : 'Code Postal', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <div class="form-group">
+                    <div class="form-group d-flex mt-2">
                         <label for=""><i class="fas fa-mobile-alt"></i></label>
-                        {{form_row(form.phone, {'attr' : {'placeholder' : 'Téléphone', 'class' : 'input'}, 'label' : false})}}
+                        {{form_widget(form.phone, {'attr' : {'placeholder' : 'Téléphone', 'class' : 'input'}, 'label' : false})}}
                     </div>
-                    <input type="submit" value="S'inscrire" class="btn btn-success">
-                    {{form_end(form)}}
+                    <div class=" col-12 mb-2 d-flex">
+                            <input type="submit" name="" value="S'inscrire" class="btn btn-info btn-submit-form">
+                        </div>                    
+                {{form_end(form)}}
+                </div>
+                <div class="col-12 col-md-6 signup-image">
+                    <figure>
+                    <img src="{{asset('images/' ~ 'tshirt-4.jpg')}}" alt="logo" class="img-signup">
+                    
+                    </figure>
+                    <a href="{{ path('login') }}" class="signup-image-link">Je suis déjà membre !</a>
+                </div>
             </div>
-            <div class="signup-image">
-                <figure><img src="{{asset('images/' ~ 'test.jpg')}}" alt="logo" class="img-signup"></figure>
-                <a href="{{path('login')}}" class="signup-image-link">Je suis déjà membre !</a>
-            </div>
+                    
         </div>
+            
     </div>
 </section>
 {% endblock %}

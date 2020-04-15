@@ -2,54 +2,73 @@
 
 {% block title %}Commande{% endblock %}
 
-{% block content %}
+{% block content %}    
+<div class="container-fluid">
+    <div class="container">
+        <div class="row  mt-5 mb-5">
+            <div class="col-12">
+                <h1 class="">Commande</h1>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-lg-6">
 
-        
-<div class="container">
+                <h3>Adresse de facturation</h3>
+                <p> {{user.nom}} {{user.prenom}} </p>
+                <p> {{user.adresse}} </p>
+                <p> {{user.ville}} {{user.cp}} </p>
+            </div>
+            <div class="col-lg-6">
 
-<h1 class="text-center mt-4">Commande</h1>
-  
-<div class="row mt-4">
-    <div class="col-lg-6">
-
-        <h3>Adresse de facturation</h3>
-        <p> {{user.nom}} {{user.prenom}} </p>
-        <p> {{user.adresse}} </p>
-        <p> {{user.ville}} {{user.cp}} </p>
+                <h3>Adresse de livraison</h3>
+                <p> {{user.nom}} {{user.prenom}} </p>
+                <p> {{user.adresse}} </p>
+                <p> {{user.ville}} {{user.cp}} </p>
+            </div>
+        </div>
+        <div class="row mt-5">  
+            <div class="col-12">
+                <h2 class="mb-3">Récapitulatif de la commande</h2>
+            </div>
+            <div class="col-12">
+                <table class="table ">
+                    <thead  class="thead-light  title-listing">
+                        <tr>
+                            <th colspan="2">Produit</th>
+                            <th>Prix</th>
+                            <th>Quantité</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td><img src="{{ asset('uploads/') ~ item.product.image }}" alt="items" width="50" height="50"></td>
+                            <td>{{ item.product.nom }}</td>
+                            <td>{{ item.product.price }}€</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.product.price * item.quantity }}€</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr class="">
+                            <td colspan="4" class="font-weight-bold text-right">Total :</td>
+                            <td class="font-weight-bold">
+                            {# résultat du total #}
+                            {{ total }} €
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="d-flex justify-content-between">
+                    <a class="text-decoration-none add-category" href="{{path('index')}}"><i class="fas fa-arrow-left mr-2"></i>Retour à la boutique</a>
+                    <a href="{{ path('order_confirm')}}" class="btn btn-info "><i class="far fa-credit-card"></i> Paiement</a>
+                </div> 
+            </div>
+        </div>
     </div>
-    <div class="col-lg-6">
-
-        <h3>Adresse de livraison</h3>
-        <p> {{user.nom}} {{user.prenom}} </p>
-        <p> {{user.adresse}} </p>
-        <p> {{user.ville}} {{user.cp}} </p>
-    </div>
-    
-    <h3 class="mt-5">Récapitulatif de la commande</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Produit</th>
-                <th>Prix</th>
-                <th>Quantité</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in items %}
-            <tr>
-                <td><img src="{{ asset('uploads/') ~ item.product.image }}" alt="items" width="50" height="50">
-                {{ item.product.nom }}</td>
-                <td>{{ item.product.price }}€</td>
-                <td>{{ item.quantity }}</td>
-                <td>{{ item.product.price * item.quantity }}€</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="{{path('order_confirm')}}">Valider la commande</a>
 </div>
 
-</div>
 
 {% endblock %}
