@@ -1,16 +1,53 @@
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Vos commandes | {{ parent() }}{% endblock %}
-{% block header %}
-    {% include "includes/adminNavBar.html.twig" %}
-{% endblock %}
+{% block title %} Détail de la commande | {{ parent() }}{% endblock %}
+
 {% block content %}
-
-    {% for detail in details %}
-            {{detail.product.nom}}
-            {{detail.quantity}}
-            {{detail.price}}
-    {% endfor %}
-
+<div class="container-fluid">
+        <div class="container">
+                <div class="row">
+                        <div class="col-12 mt-5 mb-3">
+                                <h1>Détails commande N°{{details[0].orderId.id}}</h1>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-6 d-flex justify-content-start">
+                                <a class="text-decoration-none add-category" href="{{path('client_order')}}"><i class="fas fa-arrow-left mr-2"></i>Retour au listing de mes commandes</a>
+                        </div>
+                                <table class="table table-hover  mt-3 text col-12">
+                                        <thead class="thead-dark text-uppercase">
+                                                <tr>
+                                                <th colspan="2" class="pl-5">Produit</th>
+                                                <th class="text-center">Quantité</th>
+                                                <th class="text-center">Prix</th>
+                                                <th class="text-center"> Total /produit</th>
+                                                
+                                                </tr>
+                                        </thead>
+                                        {% for detail in details %}
+                                        <tr>
+                                                <td class="text-center font-weight-bold">  <img src="{{asset('uploads/' ~ detail.product.image)}}" alt="" width="50" height="50"></td>
+                                                <td class="text-center font-weight-bold"> {{detail.product.nom}} </td>
+                                                <td class="text-center font-weight-bold">{{detail.quantity}}</td>
+                                                <td class="text-center font-weight-bold">{{detail.price}}€  </td>
+                                                <td class="text-center font-weight-bold">{{ detail.price * detail.quantity }}€</td>
+                                        </tr>
+                                        {% endfor %}
+                                        <tfoot>
+                                                <tr class="">
+                                                        <td colspan="3" class="font-weight-bold text-center"></td>
+                                                        <td class="font-weight-bold text-center">Total :</td>
+                                                        <td class="font-weight-bold ">
+                                                        {# résultat du total #}
+                                                        {# {{ total}} € #}
+                                                        </td>
+                                                </tr>
+                                        
+                                        </tfoot>
+                                </table>   
+                </div>
+        </div>              
+</div>
 
 {% endblock %}

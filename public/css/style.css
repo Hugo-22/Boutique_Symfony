@@ -1,11 +1,16 @@
 .text-bold{font-weight: 600;}
 body{font-family: Helvetica, Arial,  sans-serif;}
+.content{min-height: 80vh;}
 /* HEADER */
 .logo{font-family: 'Leckerli One',  Helvetica,Arial, sans-serif; font-size: 2rem;}
 .slide{
     height: 300px;
     overflow: hidden;
 }
+.card-product h5{color: #000;}
+.card-product h5:hover{color: #17a2b8;}
+.card-product:hover{text-decoration: none;}
+
 /* NAvbar */
 .navbar-light .navbar-nav .active > .nav-link{color: #17a2b8;}
 .navbar-light .navbar-nav .nav-link{color: #000;}
@@ -38,10 +43,6 @@ body{font-family: Helvetica, Arial,  sans-serif;}
     background-color: #ff1744!important;
 }
 
-.color-blue {
-    background-color: #17a2b8;
-}
-
 form, input, ::placeholder{font-family: Helvetica, Arial, sans-serif;}
 .input { 
     width: 100%;
@@ -52,12 +53,10 @@ form, input, ::placeholder{font-family: Helvetica, Arial, sans-serif;}
     box-sizing: border-box;
     border-radius: 0 !important;
 }
-.signup-image{ width: 100%; height: 70vh; overflow:hidden;}
-.signup-link{color: #17a2b8;}
+.signup-image{ width: 100%; height: 60vh; overflow:hidden;}
 .signup-link:hover{color: #138496;}
-.add-product, .add-category{color: #17a2b8;}
-.add-product:hover, .add-category:hover{color: #000;}
-.btn-edit:hover{ background-color: #c3c3c3; padding: .7rem.5rem; border-radius: .5rem;}
+.add-product, .add-category, .btn-edit,.signup-link{color: #17a2b8;}
+.add-product:hover, .add-category:hover,.btn-edit:hover{color: #000;}
 /* page produit */
 .image-page-produit{width: 100%; height:auto;}
 /* Firefox */
@@ -72,8 +71,15 @@ input::-webkit-outer-spin-button {
 	margin:0;
 }
 /* panier */
-.btn-shopping{font-size: 1.5rem!important;}
+.btn-shopping, .btn-edit{font-size: 1.5rem!important;}
 .icone-form{width: 1.3rem;}
+
+.detail a{color: #17a2b8; font-size: 1.5rem;}
+.detail a:hover{color: #000;}
+
+.prix-product{font-size: 1.3rem;}
+
+
 @media screen  and (max-width:991px){
     .title-listing{font-size: .8rem;}
 

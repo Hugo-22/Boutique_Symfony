@@ -33,6 +33,7 @@
             {# boucle for afin d'afficher les articles #}
              {% for product in products %}
                 <div class="col-12 col-sm-6 col-lg-3  text-center my-5">
+                <a href="{{path('details_product', {'id' : product.id})}}" class="card-product">
                     <div class="card">
                     {# gestion de l'url : dossier uploads/table article col picture #}
                         <div class="image-carte">
@@ -41,14 +42,13 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ product.nom}}</h5>
                             {# date de publication que l'on met au format jj/mm/aa #}
-                            <p class="card-text card-decription text-muted mb-0">{{product.description |slice(0,100) ~ '...'}}</p>                               
+                            <p class="card-text card-decription text-muted mb-0">{{product.description |slice(0,50)}}</p>                               
                             {# <h6 class="card-subtitle mb-2 text-muted text-right"></h6> #}
                             {# on retourne le chemin canonique absolu avec path de l'article et on ajoute l'id de l'article #}
-                                {# <div  class="mb-2 text-muted text-bold">...</div> #}
-
-                            <a href="{{path('details_product', {'id' : product.id})}}" class="btn btn-outline-info p-2">Lire la suite...</a>
+                                <div  class="mb-2 text-muted text-bold text-right">{{ product.price}} €</div>
                         </div>
                     </div>
+                </a>
                 </div>
             {% endfor %}
             </div>

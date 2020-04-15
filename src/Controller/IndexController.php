@@ -29,7 +29,7 @@ class IndexController extends AbstractController
     public function listProduct(ProductRepository $productRepository)
     {
 
-        $products = $productRepository->findAll();
+        $products = $productRepository->findBy(['isPublished' => 'true']);
 
         return $this->render('index/index.html.twig', [
             "products" => $products
