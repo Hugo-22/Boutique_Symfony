@@ -59,7 +59,7 @@ class OrderRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findTotalByIdOrder($id): string
+    public function findTotalByIdOrder($id)
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.price = :val')

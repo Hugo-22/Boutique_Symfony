@@ -208,15 +208,11 @@ class AdminController extends AbstractController
     public function detailsOrderClient(OrderRepository $orderRepository, OrderDetailRepository $orderDetailRepository, $id)
     {
         $detailsOrder = $orderDetailRepository->findDetailsOrder($id);
-        // $totalOrder = $orderRepository->findTotalByIdOrder($id);
-
-
-
-        // $tt = strval($totalOrder);
-        // dd($tt);
+        $order = $orderRepository->find($id);
 
         return $this->render('admin/order/orderDetail.html.twig', [
             "details" => $detailsOrder,
+            "order" => $order
         ]);
     }
 }

@@ -243,12 +243,14 @@ class IndexController extends AbstractController
      /**
      * @Route("/client/order/{id}", name="details_order")
      */
-    public function detailsOrder(OrderDetailRepository $orderDetailRepository, $id)
+    public function detailsOrder(OrderDetailRepository $orderDetailRepository, $id, OrderRepository $orderRepository)
     {
         $detailsOrder = $orderDetailRepository->findDetailsOrder($id);
+        $order = $orderRepository->find($id);
 
         return $this->render('index/client/detailsOrder.html.twig', [
-            "details" => $detailsOrder
+            "details" => $detailsOrder,
+            "order" => $order
         ]);
     }
 

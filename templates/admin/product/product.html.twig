@@ -15,7 +15,7 @@
                 </div>
             {% endfor %}
             <div class="row">
-                    <h1> Listing des produits</h1>
+                    <h1>Listing des produits</h1>
                 </div>
             </div>
                 <div class="col-6 d-flex justify-content-start">
@@ -44,7 +44,7 @@
                             <td class="text-center "> <img src="{{asset('uploads/' ~ product.image)}}" alt="" width="50" height="50"> </td>
                             <td class="text-center font-weight-bold">{{ product.nom }}</td>
                             <td class="text-center ">{{ product.category.nom }}</td>
-                            <td class="text-center ">{{ product.description }}</td>
+                            <td class="text-center ">{{ product.description|slice(0,30) }}</td>
                             <td class="text-center ">{{ product.price }}€</td>
                             <td class="text-center">
                                 {% if product.isPublished %}
@@ -53,7 +53,7 @@
                                     Non
                                     {% endif %}
                             </td>
-                            <td class="text-center"><a class="" href="{{ path('product_update', {'id' : product.id}) }}"><img src="{{asset('images/' ~ 'edit.svg')}}" width="30" height="30" alt="Modifier"/></a></td>
+                            <td class="text-center"><a class="btn btn-edit" href="{{ path('product_update', {'id' : product.id}) }}"><i class="fas fa-edit"></i></a></td>
                             <td class="text-center">
                                 <form action="{{path('delete_product', {'id' : product.id})}}" method="post" class="col" onsubmit="return confirm('Voulez-vous vraiment supprimer ?');">
                                     <input type="hidden" name="_method" value="SUP">
