@@ -3,7 +3,7 @@
 {% block title %}Détails du panier | {{ parent() }}{% endblock %}
 
 {% block content %}
-	<div class="container-fluid mb-5">
+	<div class="container-fluid ">
         <div class="container">
             <div class="row">
                 <div class="col-12 mt-5 mb-3">
@@ -16,7 +16,8 @@
                     <table class="table">
                         <thead class="thead-light  title-listing">
                             <tr>
-                                <th colspan="2">Produit</th>
+                                <th>Image</th>
+                                <th>Produit</th>
                                 <th>Prix</th>
                                 <th>Quantité</th>
                                 <th>Supprimer</th>
@@ -54,7 +55,7 @@
                     </table>
                     <div class="d-flex justify-content-between">
                             <a class="text-decoration-none add-category" href="{{path('index')}}"><i class="fas fa-arrow-left mr-2"></i>Retour à la boutique</a>
-                            <a href="{{ path('order')}}" class="btn btn-info ">Valider la commande</a>
+                            <a href="{{path('order')}}" class="btn btn-info ">Valider mon panier</a>
                     </div>
                     
                     {% else %}
@@ -64,7 +65,11 @@
                     </div>                   
                     {% endif %}
                 </div>
-            </div>      
-        </div>     
+
+            </div>
+                    
+        </div>
+            
     </div>
+</section>
 {% endblock %}

@@ -2,7 +2,43 @@
 
 {% block title %}Infos Clients | Admin | {{ parent() }}{% endblock %}
 {% block header %}
-    {% include "includes/adminNavBar.html.twig" %}
+    {# {% include "includes/adminNavBar.html.twig" %} #}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light text-right">
+    <a class="navbar-brand logo" href="{{ path('index') }}">My Tshirt</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('index') }}"><i class="fas fa-home"></i> Voir la boutique <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href=" {{path('admin')}} ">Dashboard</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('liste_cat') }}">Catégories <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('liste_product') }}">Produits <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('liste_user') }}">Clients <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{path('admin_orders')}}">Commandes <span class="sr-only">(current)</span></a>
+            </li>
+     
+            <li class="nav-item ">
+                {% if app.user %}
+                <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+                {% else %}
+                <a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</nav>
 {% endblock %}
 {% block content %}
 	<div class="container-fluid">
@@ -42,7 +78,7 @@
                         <tfoot>
                             <tr class="">
                                 <td colspan="4" class="font-weight-bold text-right">Total :</td>
-                                <td class="font-weight-bold ">
+                                <td class="font-weight-bold text-center">
                                 {# résultat du total #}
                                 {{ order.price }}€
                                 </td>

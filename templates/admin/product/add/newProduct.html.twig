@@ -2,14 +2,50 @@
 
 {% block title %}Admin | Ajouter un produit | {{ parent() }}{% endblock %}
 {% block header %}
-    {% include "includes/adminNavBar.html.twig" %}
+    {# {% include "includes/adminNavBar.html.twig" %} #}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light text-right">
+    <a class="navbar-brand logo" href="{{ path('index') }}">My Tshirt</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('index') }}"><i class="fas fa-home"></i> Voir la boutique <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href=" {{path('admin')}} ">Dashboard</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('liste_cat') }}">Catégories <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('liste_product') }}">Produits <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('liste_user') }}">Clients <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{path('admin_orders')}}">Commandes <span class="sr-only">(current)</span></a>
+            </li>
+     
+            <li class="nav-item ">
+                {% if app.user %}
+                <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+                {% else %}
+                <a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</nav>
 {% endblock %}
 {% block content %}
 	<div class="container-fluid ">
         <div class="container">
-            <div class="row">
-                <div class="col-12 mt-5 mb-3">
-                    <h1>
+            <div class="row  mt-5 mb-3">
+                <div class="col-12">
+                     <h1>
                     {% if isModif %}
                     Modification du produit
                     {% else %}
@@ -17,11 +53,15 @@
                     {% endif %}
                     </h1>
                 </div>
+                <div class="col-6 d-flex justify-content-start mb-3">
+                    <a class="text-decoration-none add-category" href="{{ path('liste_product')}}"><i class="fas fa-arrow-left mr-2"></i>Retour au listing des produits</a>
+                </div>
+            </div>
                 {{form_start(formP, {'attr': {'class':'row'}})}}
                         {# {{form_widget(formP)}} #}
                     <div class="input-formP col-12 mb-2">
                         {# Label #}
-                        {{ form_label(formP.nom, 'Nom du produit') }}
+                        {{ form_label(formP.nom, 'Nom du produit', {'attr': {'class':'font-weight-bold'}}) }}
                         {# Input title class input-title #}
                         {{form_widget(formP.nom, {'attr': {'class':'form-control'}})}}
                         <span id="msg-errors" class="error text-danger">{{ form_errors(formP.nom) }}</span>
@@ -45,7 +85,7 @@
                         {{ form_label(formP.category, 'Catégorie du produit') }}
                         {# Input title class input-title #}
                         {{form_widget(formP.category, {'attr': {'class':'form-control'}})}}
-                        <span id="msg-errors" class="error text-danger">{{ form_errors(formP.category) }}</span>
+                        <span id="msg-errors" class="error text-da, {'attr': {'class':'form-control'}}nger">{{ form_errors(formP.category) }}</span>
                     </div>
                     <div class="input-formP col-12 mb-2">
                         {# Label #}
@@ -65,10 +105,12 @@
                     </div>
 
                         <div class="input-formP submit-formP col-12 mb-2 d-flex justify-content-end">
-                            <input type="submit" name="" value="Enregistrer" class="btn btn-dark btn-submit-form">
+                            <input type="submit" name="" value="Enregistrer" class="btn btn-info btn-submit-form">
                         </div>
                                            
                     {{form_end(formP)}}
+        </div>
+    </div>
 
 
 {% endblock %}

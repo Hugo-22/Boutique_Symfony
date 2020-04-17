@@ -19,8 +19,8 @@
                             <tr>
                                 <th class="text-center">Numéro de commande</th>
                                 <th class="text-center">Date</th>
+                                <th class="text-center">Montant</th>
                                 <th class="text-center">Détails</th>
-                                
                             </tr>
                         </thead>
                             
@@ -29,6 +29,7 @@
                         <tr>
                             <td class="text-center font-weight-bold"> N° {{order.id}} </td>
                             <td class="text-center font-weight-bold">{{ order.date|date("d/m/Y") }}</td>
+                            <td class="text-center font-weight-bold">{{order.price}}€</td>
                             <td class="text-center font-weight-bold detail">
                                 <a href="{{path('details_order', {'id' : order.id})}}"/><i class="fas fa-search-plus"></i></a>
                             </td>

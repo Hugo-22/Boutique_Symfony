@@ -168,17 +168,6 @@ class IndexController extends AbstractController
                 'quantity' => $quantity
             ];
         }
-        // dd($panierData['product'] => $productRepository->find($id));
-        // $user = [$this->getUser()];
-        // $findId = [];
-        // foreach ($user as $id) {
-
-        //     $findId = [
-        //         'id_user' => $userRepository->find($id)->getId()
-        //     ];
-        // }
-        // dd($panierData[0]['quantity']);
-        // $id_user = $findId['id_user'];
 
         $total = 0;
 
@@ -193,7 +182,6 @@ class IndexController extends AbstractController
         $order->setPrice($total);
         $manager->persist($order);
         $manager->flush();
-
         
         for ($i=0; $i < count($panierData); $i++) {
 
@@ -222,15 +210,7 @@ class IndexController extends AbstractController
     {
 
         $user = $this->getUser();
-        // $findId = [];
-        // foreach ($user as $id) {
-
-        //     $findId = [
-        //         'id_user' => $userRepository->find($id)->getId()
-        //     ];
-        // }
-        // $id_user = $findId['id_user'];
-        // dd($id_user);
+       
 
         $orders = $orderRepository->findOrdersByIdUser($user);
 
